@@ -20,7 +20,7 @@ export default class Register extends Component {
   render() {
     const {user} = this.props
     if (user) {
-      return <Redirect to='/dashboard'/>
+      return <Redirect to='/'/>
     }
     return <Layout>
       <Card style={{maxWidth: 500}} className='mx-auto p-4'>

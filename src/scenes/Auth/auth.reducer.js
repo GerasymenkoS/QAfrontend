@@ -3,7 +3,7 @@ import {LOGIN_USER, LOGOUT_USER, REGISTER_USER} from "./auth.action";
 const initialState = {
   loading: false,
   errors: [],
-  user: undefined
+  user: null
 };
 
 export default (state = initialState, {type, payload}) => {

@@ -15,7 +15,8 @@ export const register = async (values) => {
 
   const [err, response] = await request.post('/register', values)
   if (err) throw err.response.data
-  const user = JWT(response.data.token).data
+  let user = JWT(response.data.token).data
+  if (!user) user = response.data.user
 
   rememberUser(user)
 
@@ -28,9 +29,8 @@ export const login = async ({email, password}) => {
 
   const [err, response] = await request.post('/login', {email, password})
   if (err) throw err.response.data
-
-  const user = JWT(response.data.token).data
-
+  let user = JWT(response.data.token).data
+  if (!user) user = response.data.user
   rememberUser(user)
   rememberToken(response.data)
 
@@ -48,11 +48,6 @@ export const update = async (form) => {
   return JWT(response.data.token).data
 }
 
-export const updatePassport = async (form) => {
-  const [err, response] = await request.put('/user/' + get().id, urlencodeForm(form))
-  if (err) throw err.response.data
-  return JWT(response.data.token).data
-}
 
 export const get = () => {
   return JWT(localStorage.getItem('token')).data
